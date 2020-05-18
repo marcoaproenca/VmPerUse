@@ -1,11 +1,17 @@
 package com.projetofinal.VMPerUse.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "tbl_usuario")
@@ -28,7 +34,19 @@ public class Usuario {
 	private String cargo;
 	@Column(name = "departamento", length = 100)
 	private String departamento;
+	@Column(name = "linkfoto")
+	private String linkfoto;
 	
+	@OneToMany(mappedBy = "solicitante", cascade = CascadeType.ALL)
+	@JsonIgnoreProperties("solicitante")
+	private List<Solicitacoes> pedidos;
+	
+	public List<Solicitacoes> getPedidos() {
+		return pedidos;
+	}
+	public void setPedidos(List<Solicitacoes> pedidos) {
+		this.pedidos = pedidos;
+	}
 	public int getId() {
 		return id;
 	}

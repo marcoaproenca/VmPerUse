@@ -11,7 +11,7 @@ import com.projetofinal.VMPerUse.model.Usuario;
 @Repository
 public interface UsuarioDAO extends JpaRepository<Usuario, Integer> {
 	
-	ArrayList<Usuario> findByRacfAndSenha(String racf, String senha);
-	ArrayList<Usuario> findByEmailAndSenha(String email, String senha);
+	Usuario findByRacfAndSenha(String racf, String senha);
+	Usuario findByEmailAndSenha(String email, String senha);
 
 }

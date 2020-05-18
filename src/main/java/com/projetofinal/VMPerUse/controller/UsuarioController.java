@@ -23,7 +23,31 @@ public class UsuarioController {
 		super();
 		UsuarioDAO = usuarioDAO;
 	}
+	@GetMapping("/usuarios")
+	public ResponseEntity< ArrayList<Usuario> > BuscarTodos(){
+		ArrayList<Usuario> lista = (ArrayList<Usuario>)UsuarioDAO.findAll();
+		return ResponseEntity.ok(lista);
+	}
+	@PostMapping("/login2")
 	
+	public ResponseEntity<Usuario> RecuperarUser(@RequestBody Usuario incompleto){
+		
+		Usuario userRacf = UsuarioDAO.findByRacfAndSenha(incompleto.getRacf(), incompleto.getSenha());
+		
+		if(userRacf != null) {
+			return ResponseEntity.ok(userRacf);
+		}
+		else {
+			Usuario userEmail = UsuarioDAO.findByEmailAndSenha(incompleto.getEmail(), incompleto.getSenha());
+			if(userEmail != null) {
+				return ResponseEntity.ok(userEmail);
+			}
+			else{
+				return ResponseEntity.notFound().build();
+			}
+		}
+	}
+	/*
 	@GetMapping("/login")
 	public void validateUser(@RequestParam("user") String user, @RequestParam("senha") String senha) throws Exception{
 		ArrayList<Usuario> userRacf;
@@ -42,4 +66,5 @@ public class UsuarioController {
 			}
 		}
 	}
+	*/
 }
