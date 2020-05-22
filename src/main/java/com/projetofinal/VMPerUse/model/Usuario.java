@@ -37,14 +37,15 @@ public class Usuario {
 	@Column(name = "linkfoto")
 	private String linkfoto;
 	
+
 	@OneToMany(mappedBy = "solicitante", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties("solicitante")
-	private List<Solicitacoes> pedidos;
+	private List<Solicitacao> pedidos;
 	
-	public List<Solicitacoes> getPedidos() {
+	public List<Solicitacao> getPedidos() {
 		return pedidos;
 	}
-	public void setPedidos(List<Solicitacoes> pedidos) {
+	public void setPedidos(List<Solicitacao> pedidos) {
 		this.pedidos = pedidos;
 	}
 	public int getId() {
@@ -94,5 +95,11 @@ public class Usuario {
 	}
 	public void setDepartamento(String departamento) {
 		this.departamento = departamento;
+	}
+	public String getLinkfoto() {
+		return linkfoto;
+	}
+	public void setLinkfoto(String linkfoto) {
+		this.linkfoto = linkfoto;
 	}
 }
